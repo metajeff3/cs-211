@@ -119,15 +119,33 @@ public static int[] merge2sortedlists(int[] a, int[] b) {
     int totalsize = a.length + b.length;
     int currentindex = 0;
     int[] answer = new int[a.length + b.length];
-    while(p0+p1 < totalsize){
-        if(p0 > p1) {
-            answer[currentindex] = a[p0];
-            p0++;
+    // while(p0+p1 < totalsize){
+    //     if ((a[p0] > b[p1])) {
+    //         answer[currentindex] = a[p0];
+    //         p0++;
+    //     } else {
+    //         answer[currentindex] = b[p1];
+    //         p1++;
+    //     }
+    //         currentindex++;
+    // }
+
+    while (p0 < a.length && p1 < b.length) {
+        if (a[p0] <= b[p1]) {
+            answer[i++] = a[p0++];
         } else {
-            answer[currentindex] = a[p1];
-            p1++;
+            answer[i++] = b[p1++];
         }
-        currentindex++;
+    }
+
+    // Copy remaining elements of a
+    while (p0 < a.length) {
+        answer[i++] = a[p0++];
+    }
+
+    // Copy remaining elements of b
+    while (p1 < b.length) {
+        answer[i++] = b[p1++];
     }
 
     return answer;
@@ -138,20 +156,12 @@ public static int[] mergesort(int[] a){
     if (a.length <= 1) {
         return a;
     }
-
-    if(a.length == 2) {
-        if (a[0] > a[1]){
-            return new int[] {a[1], a[0]}
-        } else {
-            return new int[] {a[0], a[1]}
-        }
-    }
     // take the left and right and keep spliting and combine
     
     // we need the first left half and the second righ thalf
-    int half = a.length/2;
-    int[] leftside = Arrays.copyOfRange(a, 1, mid);
-    int[] rightside = Arrays.copyOfRange(a, mid+1, a.length-1);
+    int mid = a.length/2;
+    int[] leftside = Arrays.copyOfRange(a, 0, mid);
+    int[] rightside = Arrays.copyOfRange(a, mid, a.length);
     
     return merge2sortedlists(mergesort(leftside), mergesort(rightside));
 }
