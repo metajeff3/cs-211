@@ -20,7 +20,8 @@ There are many ways to access the textbook so try whatever method works best for
 1. First log into Canvas and go into your CS course. You should be inside and see the sidebar. 
 2. Simply click "My Materials".
 
-![my materials on canvasm](Images/mymaterials.png)
+<img src="./Images/mymaterials.png" alt="description" width="50%">
+
 
 3. You will now be redirected to the Follet dashboard where you can see your class materials.
 
