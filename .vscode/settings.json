@@ -1,3 +1,13 @@
 {
-    "java.format.settings.url": "eclipse-formatter.xml"
+    "java.project.sourcePaths": [
+        "src/lecture"
+    ],
+    "java.format.settings.url": "eclipse-formatter.xml",
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "json-simple-1.1.1.jar",
+            "C:/Users/LabTea/OneDrive - Bellevue College/Running Start/Senior/WINTER/CS211/cs-211/lib/json-simple-1.1.1.jar"
+        ]
+    }
 }
