@@ -42,7 +42,7 @@ public class BigDataQ1 {
         //    }
 
 			for(Object child : LastHour){
-				JSONObject obj = (JSONObject) child;
+				// JSONObject obj = (JSONObject) child;
 				JSONObject pr = (JSONObject) ((JSONObject) child).get("properties");
 				System.out.printf(
 						"2) Location: %s %n3) Magnitude: %f %n4) Tsunami: %d %n5) Two Values: sig %s gap %s %n%n" , pr.get("place"),

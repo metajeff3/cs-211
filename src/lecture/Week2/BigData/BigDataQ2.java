@@ -6,8 +6,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Scanner;
-
-
 /*
 * CS 211 Big Data Quiz
 * @author Brendan Tea
@@ -15,7 +13,7 @@ import java.util.Scanner;
 * Description: Allow user to find eclipse data of their requested year.
 */
 
-public class BigDataQ1 {
+public class BigDataQ2 {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		

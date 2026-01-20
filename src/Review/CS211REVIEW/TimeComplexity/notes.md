@@ -1,4 +1,6 @@
 # Time & Space Complexity and Big O Notation Review
+>
+> Counting ammount of statements being run. not cpu time.
 
 ## Disclaimers
 
@@ -20,7 +22,7 @@ We can classify each statement and algorithm by the following general equations:
 
 ![Big O Complexity Chart](bigO.jpg)
 
-The process of classifying an algorithm is to take the **largest, worse case time complexity**. After you have the largest time complexity, chop off constants and coefficients.
+The process of classifying an algorithm is to take the **largest, worse case time complexity**. After you have the largest time complexity, chop off constants and coefficients. 
 
 > Here is an example:
 
