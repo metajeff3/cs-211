@@ -1,3 +1,5 @@
+package lecture.week2.bigdata;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,7 +16,7 @@ import java.util.Scanner;
 * Description: Use API to find earthquakes last hour and properties.
 */
 
-public class BigDataQ1 {
+public class testing {
 	public static void main(String[] args) {
 		double rate;
         try{

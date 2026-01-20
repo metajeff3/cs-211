@@ -1,3 +1,5 @@
+package lecture.week2.bigdata;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -5,7 +7,6 @@ import org.json.simple.parser.JSONParser;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Scanner;
 
 /*
 * CS 211 Big Data Quiz

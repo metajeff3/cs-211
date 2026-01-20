@@ -1,3 +1,5 @@
+package lecture.week1;
+
 class Area {
     public int test = 0;
 
@@ -39,7 +41,8 @@ public class inheritance  {
     public static void main(String[] args) {
         CircleExtension c = new CircleExtension();
         c.print(); //prints 1
-        c.test();
+ 
+       c.test();
     }
     
 }

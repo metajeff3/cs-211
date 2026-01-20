@@ -1,3 +1,5 @@
+package lecture.week2.bigdata;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -44,6 +46,8 @@ public class BigDataQ2 {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+
+		s.close();
 	}
 }
 
