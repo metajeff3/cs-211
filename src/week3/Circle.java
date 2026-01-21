@@ -42,7 +42,7 @@ public class Circle extends Canvas implements Runnable {
         this.width = width; // screen width & height
         this.height = height;
         // double buffering
-        createBufferStrategy(2);
+        createBufferStrategy(3);
         for (int i = 0; i < howManyCircle; i++) {
             CircleInfo s = new CircleInfo();
             R = rand.nextInt(256);
