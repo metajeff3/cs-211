@@ -1,4 +1,4 @@
-package lecture.week3;
+package week3;
 
 public class myCircle {
 

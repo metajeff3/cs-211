@@ -1,4 +1,4 @@
-package lecture.week3;
+package week3;
 
 import java.awt.Color;
 import java.awt.Graphics;

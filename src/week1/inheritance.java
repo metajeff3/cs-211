@@ -1,4 +1,4 @@
-package lecture.week1;
+package week1;
 
 class Area {
     public int test = 0;

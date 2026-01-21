@@ -1,4 +1,4 @@
-package lecture.week2.bigdata;
+package week2.bigdata;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
