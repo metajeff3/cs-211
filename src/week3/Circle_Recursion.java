@@ -9,9 +9,9 @@ public class Circle_Recursion extends Circle {
         super(screenWidth, screenHeight, howManyStars, starSize);
     }
 
-    @Override
+    @Override // i just need to add ,depth param and change the exit condition
     public void drawCircle(Graphics g, int cx, int cy, int radius, int angle, int angleSpeed) {
-        if (radius < 10){
+        if (radius < 5){
             return;
         }
         super.drawCircle(g, cx, cy, radius, angle, angleSpeed);
