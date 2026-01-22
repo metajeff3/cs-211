@@ -9,11 +9,11 @@ public class Circle_Recursion extends Circle {
 
     @Override // i just need to add ,depth param and change the exit condition
     public void drawCircle(Graphics g, int cx, int cy, int radius, int angle, int angleSpeed) {
-        if (radius < 10){
+        if (radius < 1){
             return;
         }
 
-        design1(g, cx, cy, radius, angle, angleSpeed);
+        design2(g, cx, cy, radius, angle, angleSpeed);
     }
 
     private void design1(Graphics g, int cx, int cy, int radius, int angle, int angleSpeed) {

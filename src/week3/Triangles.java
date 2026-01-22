@@ -2,13 +2,11 @@ package week3;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Polygon;
 import java.awt.image.BufferStrategy;
 import java.util.*;
 import javax.swing.JFrame;
 
-class StarData {
-
+class TriangleData {
     int x;
     int y;
     int size;
@@ -21,12 +19,12 @@ class StarData {
     Color color;
 }
 
-public class Stars extends JFrame implements Runnable {
+public class Triangles extends JFrame implements Runnable {
 
-    private Thread starThread;
+    private Thread triangleThread;
     private boolean running = false;
 
-    public static ArrayList<StarData> myStar = new ArrayList<>();
+    public static ArrayList<TriangleData> myTriangle = new ArrayList<>();
     static int width = 800;
     static int height = 600;
     static int howMany = 30;
@@ -35,7 +33,7 @@ public class Stars extends JFrame implements Runnable {
     static Random rand = new Random();
     static int R, G, B;
 
-    public Stars(int screenWidth, int screenHeight, int howManyStars, int starSize) {
+    public Triangles(int screenWidth, int screenHeight, int howManyTriangle, int triangleSize) {
         super("CS211- Fall 2025");
         setBounds(100, 100, width, height);
         setResizable(false);
@@ -44,8 +42,8 @@ public class Stars extends JFrame implements Runnable {
 
         // add stars to the array and data
         // double buffering
-        this.howMany = howManyStars;
-        this.starSize = starSize;
+        this.howMany = howManyTriangle;
+        this.starSize = triangleSize;
         createBufferStrategy(2);
         createStar();
     }
@@ -53,7 +51,7 @@ public class Stars extends JFrame implements Runnable {
     public static void createStar() {
 
         for (int i = 0; i < howMany; i++) {
-            StarData s = new StarData();
+            TriangleData s = new TriangleData();
             R = rand.nextInt(256);
             G = rand.nextInt(256);
             B = rand.nextInt(256);
@@ -72,20 +70,20 @@ public class Stars extends JFrame implements Runnable {
                 s.angleSpeed *= -1;
             }
 
-            myStar.add(s);
+            myTriangle.add(s);
         }
     }
 
     public synchronized void start() {
         running = true;
-        starThread = new Thread(this);
-        starThread.start();
+        triangleThread = new Thread(this);
+        triangleThread.start();
     }
 
     public synchronized void stop() {
         running = false;
         try {
-            starThread.join();
+            triangleThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -114,74 +112,66 @@ public class Stars extends JFrame implements Runnable {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, width, height);
 
-        for (int i = 0; i < myStar.size(); i++) {
-            g.setColor(myStar.get(i).color);
+        for (int i = 0; i < myTriangle.size(); i++) {
+            g.setColor(myTriangle.get(i).color);
 
-            if (myStar.get(i).size > 40 || myStar.get(i).size < 1) {
-                myStar.get(i).zoom *= -1;
+            if (myTriangle.get(i).size > 40 || myTriangle.get(i).size < 1) {
+                myTriangle.get(i).zoom *= -1;
             }
-            myStar.get(i).size += myStar.get(i).zoom;
+            myTriangle.get(i).size += myTriangle.get(i).zoom;
 
-            myStar.get(i).x += myStar.get(i).speedX;
+            myTriangle.get(i).x += myTriangle.get(i).speedX;
 
-            if (myStar.get(i).x > width - myStar.get(i).size) {
+            if (myTriangle.get(i).x > width - myTriangle.get(i).size) {
 
-                myStar.get(i).x = width - myStar.get(i).size;
+                myTriangle.get(i).x = width - myTriangle.get(i).size;
 
-                myStar.get(i).speedX = -myStar.get(i).speedX;
-            }
-
-            if (myStar.get(i).x < myStar.get(i).size) {
-                myStar.get(i).x = myStar.get(i).size;
-                myStar.get(i).speedX = -myStar.get(i).speedX;
+                myTriangle.get(i).speedX = -myTriangle.get(i).speedX;
             }
 
-            myStar.get(i).y += myStar.get(i).speedY;
-            if (myStar.get(i).y > height - myStar.get(i).size) {
-                myStar.get(i).y = height - myStar.get(i).size;
-                myStar.get(i).speedY = -myStar.get(i).speedY;
+            if (myTriangle.get(i).x < myTriangle.get(i).size) {
+                myTriangle.get(i).x = myTriangle.get(i).size;
+                myTriangle.get(i).speedX = -myTriangle.get(i).speedX;
             }
 
-            if (myStar.get(i).y < boardTop + myStar.get(i).size) {
-                myStar.get(i).y = boardTop + myStar.get(i).size;
-                myStar.get(i).speedY = -myStar.get(i).speedY;
+            myTriangle.get(i).y += myTriangle.get(i).speedY;
+            if (myTriangle.get(i).y > height - myTriangle.get(i).size) {
+                myTriangle.get(i).y = height - myTriangle.get(i).size;
+                myTriangle.get(i).speedY = -myTriangle.get(i).speedY;
             }
 
-            myStar.get(i).angle += myStar.get(i).angleSpeed;
-            if (myStar.get(i).angle >= 360 || myStar.get(i).angle <= -360) {
-                myStar.get(i).angle = 0;
+            if (myTriangle.get(i).y < boardTop + myTriangle.get(i).size) {
+                myTriangle.get(i).y = boardTop + myTriangle.get(i).size;
+                myTriangle.get(i).speedY = -myTriangle.get(i).speedY;
             }
 
-            drawStar(g, myStar.get(i).x, myStar.get(i).y, myStar.get(i).size, myStar.get(i).angle);
+            myTriangle.get(i).angle += myTriangle.get(i).angleSpeed;
+            if (myTriangle.get(i).angle >= 360 || myTriangle.get(i).angle <= -360) {
+                myTriangle.get(i).angle = 0;
+            }
+
+            drawTriangle(g, myTriangle.get(i).x, myTriangle.get(i).y, myTriangle.get(i).size, myTriangle.get(i).angle);
         }
         g.dispose();
         bs.show();
     }
 
-    public void drawStar(Graphics g, int sx, int sy, int size, int angle) {
-        int[] xCoords = new int[10];
-        int[] yCoords = new int[10];
+    public void drawTriangle(Graphics g, int tx, int ty, int size, int angle) {
+        int[] xCoords = new int[3];
+        int[] yCoords = new int[3];
+
         int ang = 90 - angle;
-        double rad;
         double PI = Math.PI;
 
-        for (int i = 0; i < 10; i++) {
-            if (i % 2 == 0) {
-                rad = size * 0.38;
-            } else {
-                rad = size;
-            }
-            xCoords[i] += (int) (rad * Math.cos(PI * ang / 180.0));
-            yCoords[i] -= (int) (rad * Math.sin(PI * ang / 180.0));
-            ang += 36;
-            xCoords[i] += sx;
-            yCoords[i] += sy;
+        for (int i = 0; i < 3; i++) {
+            xCoords[i] += (int) (size * Math.cos(PI * ang / 180.0));
+            yCoords[i] -= (int) (size * Math.sin(PI * ang / 180.0));
+            ang += 180/3;
+            xCoords[i] += tx;
+            yCoords[i] += ty;
         }
-        // g.fillPolygon(xCoords, yCoords, 10);
 
-        Polygon p = new Polygon(xCoords, yCoords, 10);
-        g.drawPolygon(p);
+        g.fillPolygon(xCoords, yCoords, 3);
     }
-
 
 }
