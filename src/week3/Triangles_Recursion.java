@@ -20,17 +20,14 @@ public class Triangles_Recursion extends Triangles {
     private void design1(Graphics g, int tx, int ty, int size, int angle) {
         super.drawTriangle(g, tx, ty, size, angle);
 
-  
-        int ang = 90 - angle;
-        double PI = Math.PI;
-
+        double offset = 1 * Math.PI/ 6; 
         for (int i = 0; i < 3; i++) {
             int xCoords = 0;
             int yCoords = 0;
 
-            xCoords += (int) (size * Math.cos(PI * ang / 180.0));
-            yCoords -= (int) (size * Math.sin(PI * ang / 180.0));
-            ang += 180/3;
+            double ang = offset + 2 * Math.PI * i / 3;
+            xCoords += (int) (size * Math.cos(ang));
+            yCoords += (int) (size * Math.sin(ang));
             xCoords += tx;
             yCoords += ty;
             this.drawTriangle(g, xCoords, yCoords, size/2, angle);

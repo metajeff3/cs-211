@@ -2,6 +2,7 @@ package week3;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Polygon;
 import java.awt.image.BufferStrategy;
 import java.util.*;
 import javax.swing.JFrame;
@@ -160,18 +161,19 @@ public class Triangles extends JFrame implements Runnable {
         int[] xCoords = new int[3];
         int[] yCoords = new int[3];
 
-        int ang = 90 - angle;
-        double PI = Math.PI;
-
+        double offset = 1 * Math.PI/ 6; 
         for (int i = 0; i < 3; i++) {
-            xCoords[i] += (int) (size * Math.cos(PI * ang / 180.0));
-            yCoords[i] -= (int) (size * Math.sin(PI * ang / 180.0));
-            ang += 180/3;
+            double ang = offset + 2 * Math.PI * i / 3;
+            xCoords[i] += (int) (size * Math.cos(ang));
+            yCoords[i] += (int) (size * Math.sin(ang));
             xCoords[i] += tx;
             yCoords[i] += ty;
         }
 
-        g.fillPolygon(xCoords, yCoords, 3);
+        // g.fillPolygon(xCoords, yCoords, 3);
+
+        Polygon p = new Polygon(xCoords, yCoords, 3);
+        g.drawPolygon(p);
     }
 
 }
