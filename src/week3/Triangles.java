@@ -67,6 +67,7 @@ public class Triangles extends JFrame implements Runnable {
 
             s.angle = rand.nextInt(30);
             s.angleSpeed = rand.nextInt(2) + 1;
+        
             if (rand.nextInt(2) == 0) {
                 s.angleSpeed *= -1;
             }
@@ -157,7 +158,27 @@ public class Triangles extends JFrame implements Runnable {
         bs.show();
     }
 
-    public void drawTriangle(Graphics g, int tx, int ty, int size, int angle) {
+     public void drawTriangle(Graphics g, int tx, int ty, int size, int angle) {
+        int[] xCoords = new int[3];
+        int[] yCoords = new int[3];
+
+
+        for (int i = 0; i < 3; i++) {
+            double ang = 2 * Math.PI * i /3 ;
+            ang += Math.PI * angle/ 90;
+            xCoords[i] += (int) (size * Math.cos(ang));
+            yCoords[i] += (int) (size * Math.sin(ang));
+            xCoords[i] += tx;
+            yCoords[i] += ty;
+        }
+
+        // g.fillPolygon(xCoords, yCoords, 3);
+
+        Polygon p = new Polygon(xCoords, yCoords, 3);
+        g.drawPolygon(p);
+    }
+
+    public void drawUprightTriangle(Graphics g, int tx, int ty, int size, int angle) {
         int[] xCoords = new int[3];
         int[] yCoords = new int[3];
 

@@ -1,4 +1,4 @@
-package week3;
+package combine;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,7 +7,7 @@ import java.awt.image.BufferStrategy;
 import java.util.*;
 import javax.swing.JFrame;
 
-class StarData {
+class ShapeData {
 
     int x;
     int y;
@@ -21,12 +21,12 @@ class StarData {
     Color color;
 }
 
-public class Stars extends JFrame implements Runnable {
+public class AllShapes extends JFrame implements Runnable {
 
-    private Thread starThread;
+    private Thread shapeThread;
     private boolean running = false;
 
-    public static ArrayList<StarData> myStar = new ArrayList<>();
+    public static ArrayList<ShapeData> myShape = new ArrayList<>();
     static int width = 800;
     static int height = 600;
     static int howMany = 30;
@@ -35,7 +35,7 @@ public class Stars extends JFrame implements Runnable {
     static Random rand = new Random();
     static int R, G, B;
 
-    public Stars(int screenWidth, int screenHeight, int howManyStars, int starSize) {
+    public AllShapes(int screenWidth, int screenHeight, int howManyStars, int starSize) {
         super("CS211- Fall 2025");
         setBounds(100, 100, width, height);
         setResizable(false);
@@ -47,13 +47,13 @@ public class Stars extends JFrame implements Runnable {
         this.howMany = howManyStars;
         this.starSize = starSize;
         createBufferStrategy(2);
-        createStar();
+        createShape();
     }
 
-    public static void createStar() {
+    public static void createShape() {
 
         for (int i = 0; i < howMany; i++) {
-            StarData s = new StarData();
+            ShapeData s = new ShapeData();
             R = rand.nextInt(256);
             G = rand.nextInt(256);
             B = rand.nextInt(256);
@@ -72,20 +72,20 @@ public class Stars extends JFrame implements Runnable {
                 s.angleSpeed *= -1;
             }
 
-            myStar.add(s);
+            myShape.add(s);
         }
     }
 
     public synchronized void start() {
         running = true;
-        starThread = new Thread(this);
-        starThread.start();
+        shapeThread = new Thread(this);
+        shapeThread.start();
     }
 
     public synchronized void stop() {
         running = false;
         try {
-            starThread.join();
+            shapeThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -96,7 +96,7 @@ public class Stars extends JFrame implements Runnable {
         while (running) {
             paint();
             try {
-                Thread.sleep(10); // org 16
+                Thread.sleep(32); // org 16
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -114,45 +114,47 @@ public class Stars extends JFrame implements Runnable {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, width, height);
 
-        for (int i = 0; i < myStar.size(); i++) {
-            g.setColor(myStar.get(i).color);
+        for (int i = 0; i < myShape.size(); i++) {
+            g.setColor(myShape.get(i).color);
 
-            if (myStar.get(i).size > 40 || myStar.get(i).size < 1) {
-                myStar.get(i).zoom *= -1;
+            if (myShape.get(i).size > 40 || myShape.get(i).size < 1) {
+                myShape.get(i).zoom *= -1;
             }
-            myStar.get(i).size += myStar.get(i).zoom;
+            myShape.get(i).size += myShape.get(i).zoom;
 
-            myStar.get(i).x += myStar.get(i).speedX;
+            myShape.get(i).x += myShape.get(i).speedX;
 
-            if (myStar.get(i).x > width - myStar.get(i).size) {
+            if (myShape.get(i).x > width - myShape.get(i).size) {
 
-                myStar.get(i).x = width - myStar.get(i).size;
+                myShape.get(i).x = width - myShape.get(i).size;
 
-                myStar.get(i).speedX = -myStar.get(i).speedX;
-            }
-
-            if (myStar.get(i).x < myStar.get(i).size) {
-                myStar.get(i).x = myStar.get(i).size;
-                myStar.get(i).speedX = -myStar.get(i).speedX;
+                myShape.get(i).speedX = -myShape.get(i).speedX;
             }
 
-            myStar.get(i).y += myStar.get(i).speedY;
-            if (myStar.get(i).y > height - myStar.get(i).size) {
-                myStar.get(i).y = height - myStar.get(i).size;
-                myStar.get(i).speedY = -myStar.get(i).speedY;
+            if (myShape.get(i).x < myShape.get(i).size) {
+                myShape.get(i).x = myShape.get(i).size;
+                myShape.get(i).speedX = -myShape.get(i).speedX;
             }
 
-            if (myStar.get(i).y < boardTop + myStar.get(i).size) {
-                myStar.get(i).y = boardTop + myStar.get(i).size;
-                myStar.get(i).speedY = -myStar.get(i).speedY;
+            myShape.get(i).y += myShape.get(i).speedY;
+            if (myShape.get(i).y > height - myShape.get(i).size) {
+                myShape.get(i).y = height - myShape.get(i).size;
+                myShape.get(i).speedY = -myShape.get(i).speedY;
             }
 
-            myStar.get(i).angle += myStar.get(i).angleSpeed;
-            if (myStar.get(i).angle >= 360 || myStar.get(i).angle <= -360) {
-                myStar.get(i).angle = 0;
+            if (myShape.get(i).y < boardTop + myShape.get(i).size) {
+                myShape.get(i).y = boardTop + myShape.get(i).size;
+                myShape.get(i).speedY = -myShape.get(i).speedY;
             }
 
-            drawStar(g, myStar.get(i).x, myStar.get(i).y, myStar.get(i).size, myStar.get(i).angle);
+            myShape.get(i).angle += myShape.get(i).angleSpeed;
+            if (myShape.get(i).angle >= 360 || myShape.get(i).angle <= -360) {
+                myShape.get(i).angle = 0;
+            }
+
+            drawStar(g, myShape.get(i).x+100, myShape.get(i).y, myShape.get(i).size, myShape.get(i).angle);
+            drawTriangle(g, myShape.get(i).x-100, myShape.get(i).y, myShape.get(i).size, myShape.get(i).angle);
+            drawCircle(g, myShape.get(i).x, myShape.get(i).y, myShape.get(i).size);
         }
         g.dispose();
         bs.show();
@@ -183,5 +185,35 @@ public class Stars extends JFrame implements Runnable {
         g.drawPolygon(p);
     }
 
+     public void drawTriangle(Graphics g, int tx, int ty, int size, int angle) {
+        int[] xCoords = new int[3];
+        int[] yCoords = new int[3];
+
+
+        for (int i = 0; i < 3; i++) {
+            double ang = 2 * Math.PI * i /3 ;
+            ang += Math.PI * angle/ 90;
+            xCoords[i] += (int) (size * Math.cos(ang));
+            yCoords[i] += (int) (size * Math.sin(ang));
+            xCoords[i] += tx;
+            yCoords[i] += ty;
+        }
+
+        // g.fillPolygon(xCoords, yCoords, 3);
+
+        Polygon p = new Polygon(xCoords, yCoords, 3);
+        g.drawPolygon(p);
+    }
+
+    public void drawCircle(Graphics g, int cx, int cy, int radius) {
+        // Calculate the top-left corner of the bounding box for the circle
+        int x = cx - radius;
+        int y = cy - radius;
+        int diameter = radius * 2;
+        // outlined circle
+        g.drawOval(x, y, diameter, diameter);
+        // filled circle
+        // g.fillOval(x, y, diameter, diameter);
+    }
 
 }

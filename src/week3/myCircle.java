@@ -9,7 +9,8 @@ public class myCircle {
         int circleMaxSize = 100;
         //Circle SR = new Circle(screenWidth, screenHeight, howManyCircles, circleMaxSize); // none recursion
         // keep this for recursion
-         Circle_Recursion SR = new Circle_Recursion(screenWidth, screenHeight, howManyCircles, circleMaxSize);
+        
+        Circle_Recursion SR = new Circle_Recursion(screenWidth, screenHeight, howManyCircles, circleMaxSize);
         SR.start();
     }
 }
