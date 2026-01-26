@@ -7,6 +7,8 @@ import java.awt.image.BufferStrategy;
 import java.util.*;
 import javax.swing.JFrame;
 
+import combine.AllShapes;
+
 class TriangleData {
     int x;
     int y;
@@ -117,8 +119,12 @@ public class Triangles extends JFrame implements Runnable {
         for (int i = 0; i < myTriangle.size(); i++) {
             g.setColor(myTriangle.get(i).color);
 
-            if (myTriangle.get(i).size > 40 || myTriangle.get(i).size < 1) {
-                myTriangle.get(i).zoom *= -1;
+            if (myTriangle.get(i).size > Triangles.starSize) { // if zoom doesnt get out of threshold, it'll bug out
+                myTriangle.get(i).zoom = -Math.abs(myTriangle.get(i).zoom);
+            }
+
+            if (myTriangle.get(i).size < 1) {
+                myTriangle.get(i).zoom = Math.abs(myTriangle.get(i).zoom);
             }
             myTriangle.get(i).size += myTriangle.get(i).zoom;
 

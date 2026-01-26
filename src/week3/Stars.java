@@ -117,8 +117,13 @@ public class Stars extends JFrame implements Runnable {
         for (int i = 0; i < myStar.size(); i++) {
             g.setColor(myStar.get(i).color);
 
-            if (myStar.get(i).size > 40 || myStar.get(i).size < 1) {
-                myStar.get(i).zoom *= -1;
+            
+            if (myStar.get(i).size > Stars.starSize) { // if zoom doesnt get out of threshold, it'll bug out
+                myStar.get(i).zoom = -Math.abs(myStar.get(i).zoom);
+            }
+
+            if (myStar.get(i).size < 1) {
+                myStar.get(i).zoom = Math.abs(myStar.get(i).zoom);
             }
             myStar.get(i).size += myStar.get(i).zoom;
 
