@@ -7,6 +7,13 @@
 
 Head Index is **starts at 1** when using search.
 
+__C HEAD 1
+
+__B 2
+
+__A 3
+
+Prints from bottom to top. Stacks are similair to array.
 
 ![example stack](stack.png)
 
@@ -29,8 +36,6 @@ System.out.println(myStack.isEmpty()); // false
 System.out.println(myStack.search(1)); // 1
 System.out.println(myStack.search(9)); // -1 NOT FOUND
 ```
-
-
 | Methods                | Return  |
 | ---------------------- | ------- |
 | `empty()`      | `boolean`   |
@@ -39,11 +44,36 @@ System.out.println(myStack.search(9)); // -1 NOT FOUND
 | `push(E item)`     | `E` |
 | `search(Object o)`     | `int` |
 
+## Fun problem
+Given the input stream A,B,C,D,E,F Write the sequence of operations (Push for stack and
+Pop for unstack) which would produce the output sequence C,B,D,E,F,A​.
+
+Answer:
+* push A
+* push B
+* push C -> Pop C -> print C
+* Pop B -> print B
+* push D -> Pop D -> print D
+* push E -> Pop E -> print E
+* push F -> Pop F -> print F
+* pop A -> print A
+
+```java
+myStack.push("A");
+myStack.push("B");
+
+System.out.println(myStack);
+// [A, B]
+//  2, 1
+System.out.println(myStack.search("A")); // 2
+```
+
+
 ## Queue
 
 Can be implemented using Arrays or LinkedLists. You can't search.
 
-![example stack](stack.png)
+![example stack](queue.png)
 
 ```java
 Queue<String> q = new LinkedList<>();
@@ -64,3 +94,5 @@ System.out.println(q.peek()); // B
 | `poll()`      | `E` |
 | `offer(Object o)`     | `boolean` |
 | `elememt()`     | `E` |
+
+Inherits `java.util.Collections`. Use `.contains()`

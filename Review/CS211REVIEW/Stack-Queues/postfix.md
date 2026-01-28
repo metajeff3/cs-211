@@ -15,6 +15,21 @@ We can use queues and push the `(` & `{` and pop the `)` & `}`, checking if the 
 
 * For nested parathensis, `(5+2)*(6-4)`, we take each number and do the same process. Think of `5+2` as `7`. Then we have a simplified postfix of `7*2` as `72*`. Now, all we need to is to bring back the full equation. `(5+2)*(6-4)` is `52+64-*`.
 
+Another example
+
+` 1 + 2 * 3 - 4 ` is `123*+4-`.
+Translating `123*+4-`, we do stack operations.
+* push `[1, 2, 3]` to stack.
+* hit an operator `*`, pop out 2 of the stack
+* `2*3 = 6`. push `6` to stack becomes `[1, 6]`
+* hit an operator `+`, pop out 2 of the stack
+* `1+6 = 7`, push `7` stack becomes `[7]`
+* push `4` stack becomes `[7, 4]`
+* hit an operator `-`, pop out 2 of the stack
+* `7-4 = 3`, push `3` to stack.
+
+* final answer is `[3]`
+
 ## How to read and check
 
 Think of the compiler reading left-to-right until there are pairs of numbers with an operation.
